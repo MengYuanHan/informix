@@ -4,6 +4,7 @@ using System.Data;
 using System.Collections;
 using System.Collections.Generic;
 using Oracle.ManagedDataAccess.Client;
+using System.Data.OracleClient;
 
 namespace informix.DBUtility
 {
