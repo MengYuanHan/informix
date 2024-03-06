@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="informix.Model" namespace="informix.Model.Entities">
+  <class name="informix.Model.Entities.Sys_Department,informix.Model"  table="Sys_Department" lazy ="true" >
+   	<id name="DeptId" column="DEPTID" type="int">
+      <generator class="sequence">
+        <param name="sequence">SEQ_DEPTID</param>
+      </generator>
+		</id>
+		<property name="Dept" type="string" column="DEPT" />
+		<property name="ParentId" type="int" column="PARENTID" />
+    <property name="ShowOrder" type="int" column="SHOWORDER" />
+    <property name="DeptLevel" type="int" column="DEPTLEVEL" />
+    <property name="ChildCount" type="int" column="CHILDCOUNT" />
+    <property name="Deletes" type="int" column="DELETES" />
+  </class>
+</hibernate-mapping>

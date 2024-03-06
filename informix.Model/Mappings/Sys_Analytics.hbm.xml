@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="informix.Model" namespace="informix.Model.Entities">
+  <class name="informix.Model.Entities.Sys_Analytics,informix.Model"  table="Sys_Analytics" lazy ="true">
+    <id name="AnalyticsId" column="AnalyticsId" type="int">
+      <generator class="sequence">
+        <param name="sequence">SEQ_ANALYTICSID</param>
+      </generator>
+    </id>
+    <property name="FileName" type="string" column="FILENAME" />
+    <property name="FileType" type="string" column="FILETYPE" />
+    <property name="WholeUrl" type="string" column="WHOLEURL" />
+    <property name="FileSize" type="int" column="FILESIZE" />
+    <property name="CreateTime" type="DateTime" column="CREATETIME" />
+    <property name="WriteTime" type="DateTime" column="WRITETIME" />
+    <property name="AccessTime" type="DateTime" column="ACCESSTIME" />
+  </class>
+</hibernate-mapping>

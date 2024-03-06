@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="informix.Model" namespace="informix.Model.Entities">
+  <class name="informix.Model.Entities.Sys_Module,informix.Model"  table="Sys_Module" lazy ="true" >
+    <id name="ModuleId" column="MODULEID" type="int">
+      <generator class="sequence">
+        <param name="sequence">SEQ_MODULEID</param>
+      </generator>
+    </id>
+    <property name="AppId" type="int" column="APPID" />
+    <property name="ParentId" type="int" column="PARENTID" />
+    <property name="Module" type="string" column="MODULE" />
+    <property name="Directory" type="string" column="DIRECTORY" />
+    <property name="Code" type="string" column="CODE" />
+    <property name="Issystem" type="int" column="ISSYSTEM" />
+    <property name="Close" type="int" column="CLOSE" />
+    <property name="Icon" type="string" column="ICON" />
+    <property name="Status" type="string" column="STATUS" />
+    <!--多对多关系：Order有多个Products-->
+    <!--<bag name="Applications" generic="true" table="SYS_APP_MODULE">
+      <key column="`Sys_Module`"/>
+      <many-to-many column="Sys_Application" class ="informix.Model.Entities.Sys_Application,informix.Model"/>
+    </bag>-->
+</class>
+</hibernate-mapping>

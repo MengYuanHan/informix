@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>RoleInfo</title>
+    <link href="~/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/pager.css" rel="stylesheet" />
+    <link href="~/css/Tooltip.css" rel="stylesheet" />
+    <link href="~/skins/aero.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            @Html.Raw(ViewData["location"].ToString())
+        </ul>
+    </div>
+
+    <div class="rightinfo">
+        <div class="tools">
+            <ul class="toolbar">
+                <li class="click" id="open" onclick="javascript:showDialog()"><span>
+                    <img src="../images/t01.png" /></span>添加</li>
+            </ul>
+        </div>
+        <div id="roleinfo">
+        </div>
+        <div id='page-bottom' class='pageinfo'></div>
+    </div>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/Tooltip.mini.js"></script>
+    <script src="~/Scripts/jquery.pager.js"></script>
+    <script src="~/Scripts/artDialog.source.js"></script>
+    <script src="~/Scripts/Common.js" type="text/javascript"></script>
+    <script src="~/js/role.js"></script>
+</body>
+</html>

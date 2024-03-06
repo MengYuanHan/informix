@@ -1,0 +1,17 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AppField</title>
+    <link href="../css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            @Html.Raw(ViewData["location"].ToString())
+        </ul>
+    </div>
+</body>
+</html>

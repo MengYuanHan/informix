@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="informix.Model" namespace="informix.Model.Entities">
+  <class name="informix.Model.Entities.Sys_Authority,informix.Model"  table="Sys_Authority" lazy ="true" >
+   	<id name="AuthorityId" column="AUTHORITYID" type="int">
+      <generator class="sequence">
+        <param name="sequence">SEQ_AUTHORITYID</param>
+      </generator>
+		</id>
+		<property name="Authority" type="string" column="AUTHORITY" />
+		<property name="Type" type="string" column="TYPE" />
+    <property name="Remark" type="string" column="REMARK" />
+  </class>
+</hibernate-mapping>

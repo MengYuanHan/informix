@@ -1,0 +1,56 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>出错日志</title>
+    <link href="../../css/style.css" rel="stylesheet" />
+    <link href="../../css/pager.css" rel="stylesheet" />
+    <link href="../../css/Tooltip.css" rel="stylesheet" />
+    <link href="../../skins/aero.css" rel="stylesheet" />
+    <script src="../../Scripts/jquery-1.10.2.js"></script>
+    <script src="../../Scripts/jquery.pager.js"></script>
+    <script src="../../Scripts/Tooltip.mini.js"></script>
+    <script src="../../Scripts/artDialog.source.js"></script>
+    <script src="../../Scripts/iframeTools.source.js"></script>
+    <script src="../../Scripts/Common.js" type="text/javascript"></script>
+    <script src="../../js/errorlog.js"></script>
+</head>
+<body>
+    <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            @Html.Raw(ViewData["location"].ToString())
+        </ul>
+    </div>
+    <div class="rightinfo">
+        <div class="tools">
+            <ul class="toolbar">
+                <li class="click" id="open" onclick="javascript: ;"><span>
+                    <img src="../images/t01.png" /></span>生成日志</li>
+            </ul>
+        </div>
+        <div id="loglist">
+            <table class="tablelist">
+                <thead>
+                    <tr>
+                        <th>文件名</th>
+                        <th>文件类型</th>
+                        <th>完整路径</th>
+                        <th>文件大小</th>
+                        <th>创建时间</th>
+                        <th>写入文件的时间</th>
+                        <th>访问的时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+
+        </div>
+        <div id='page-bottom' class='pageinfo'></div>
+    </div>
+    <div id="read"></div>
+</body>
+</html>

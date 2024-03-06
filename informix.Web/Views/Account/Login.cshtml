@@ -1,0 +1,99 @@
+﻿<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>信息管理系统</title>
+    <link href="~/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="~/skins/aero.css" rel="stylesheet" />
+    <link href="~/css/sweetalert2.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/artDialog.source.js"></script>
+    <script src="~/Scripts/iframeTools.source.js"></script>
+    <script src="~/Scripts/sweetalert2.js"></script>
+    <script src="~/Scripts/cloud.js" type="text/javascript"></script>
+    <script src="~/Scripts/Common.js" type="text/javascript"></script>
+    <script language="javascript">
+        $(document).ready(function () {
+            $('.loginbox').css({ 'position': 'absolute', 'left': ($(window).width() - 692) / 2 });
+            $(window).resize(function () {
+                $('.loginbox').css({ 'position': 'absolute', 'left': ($(window).width() - 692) / 2 });
+            })
+
+            $('#login').click(function () {
+                var status = requestUrl('/Account/LogInOrOut', $("#frm").serialize());
+
+                //验证登陆密码，status值为1则正常登陆
+                if (status == "0") {
+                    swal('Fail', '密码出错，请重新输入!', 'error');
+                }
+                else if (status == "2") {
+                    swal('Fail', '用户已停用，请联系管理员!', 'error');
+                }
+                else {
+                    var hiddenarea = $("#logincontainer>#mainBody,#logincontainer>.logintop,#logincontainer>.loginbody,.loginbody>.loginbox,.loginbm");
+                    hiddenarea.hide();
+                    $("#box").css("background", "#EEEEEE");
+                    $("#logincontainer>#loading").show();
+                    setTimeout(function () {
+                        window.location = "/home/main";
+                    }, 1000);
+
+                }
+            });
+        });
+        //按回车触发登陆
+        $(document).keydown(function () {
+            if (event.keyCode == 13) {
+                $('#login').click();
+            }
+        })
+    </script>
+
+</head>
+
+<body id="box" style="background-color: #df7611; background-image: url(images/light.png); background-repeat: no-repeat; background-position: center top; overflow: hidden;">
+    <form id="frm">
+        <div id="logincontainer">
+
+            <div id="mainBody">
+                <div id="cloud1" class="cloud"></div>
+                <div id="cloud2" class="cloud"></div>
+            </div>
+
+
+            <div class="logintop">
+                <span>欢迎登录后台管理界面平台</span>
+                <ul>
+                    <li><a href="#">回首页</a></li>
+                    <li><a href="#">帮助</a></li>
+                    <li><a href="#">关于</a></li>
+                </ul>
+            </div>
+
+
+            <div class="loginbody">
+                <span class="systemlogo"></span>
+                <div class="loginbox">
+                    <ul>
+                        <li>
+                            <input id="username" name="record.userName" type="text" class="loginuser" value="admin" onclick="javascript: this.value = ''" />
+                        </li>
+                        <li>
+                            <input id="password" name="record.password" type="password" class="loginpwd" value="admin" onclick="javascript: this.value = ''" />
+                        </li>
+                        <li>
+                            <input id="login" name="登陆" type="button" class="loginbtn" value="登录" /><label><input name="" type="checkbox" value="" checked="checked" />记住密码</label><label><a href="#">忘记密码？</a></label>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div id="loading" style="display: none;">
+                <img src="~/images/loading.gif" style="position: relative; left: 45%; top: 405px; height: 25px; width: 25px;" />
+                <span style="position: relative; left: 46.5%; top: 380px; font-size: 15px;">正在进入系统,请稍候....</span>
+            </div>
+            <div class="loginbm">版权所有 <a href="#">Calvin Robert</a></div>
+        </div>
+    </form>
+</body>
+</html>

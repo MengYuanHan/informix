@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>应用模块</title>
+    <link href="~/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/pager.css" rel="stylesheet" />
+    <link href="~/css/Tooltip.css" rel="stylesheet" />
+    <link href="~/skins/aero.css" rel="stylesheet" />
+    <link href="~/css/smartMenu.css" rel="stylesheet" />
+</head>
+<body>
+     <div class="place">
+        <span>位置：</span>
+        <ul class="placeul">
+            @Html.Raw(ViewData["location"].ToString())
+        </ul>
+    </div>   
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery.pager.js"></script>
+    <script src="~/Scripts/Tooltip.mini.js"></script>
+    <script src="~/Scripts/artDialog.source.js"></script>
+    <script src="~/Scripts/iframeTools.source.js"></script>
+    <script src="~/Scripts/Common.js" type="text/javascript"></script>
+    <script src="~/Scripts/d3.v3.min.js"></script>
+    <script src="~/Scripts/jquery-smartMenu.js"></script>
+    <script src="~/js/appmodule.js"></script>
+</body>
+</html>

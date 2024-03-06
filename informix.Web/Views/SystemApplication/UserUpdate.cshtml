@@ -1,0 +1,266 @@
+﻿<html>
+<head>
+    <title>用户信息修改</title>
+    <link href="~/css/custom.css" rel="stylesheet" />
+    <link href="~/skins/aero.css" rel="stylesheet" />
+    <link href="~/css/Tooltip.css" rel="stylesheet" />
+    <link href="../../css/sweetalert2.css" rel="stylesheet" />
+</head>
+<body onload="onloadprovince()">
+    <center>
+<div id="userinfo">
+    <h2>修改个人信息</h2>
+            <table width="998" height="400" border="1" bordercolor="black" cellpadding="0" cellspacing="0"  style="text-align:center;">
+                <tr>
+                    <td>用户名:</td>
+                    <td>
+                        <input class="inputs" id="username" width="200" type="text" >
+                    </td>
+                     <td>性  别</td>
+                    <td>男<input id="man" type="radio" name="sex" value="1"/> 女<input id="woman" type="radio" name="sex" value="2" /> </td>
+                </tr>
+                <tr>
+                    <td>密  码:</td>
+                    <td>
+                        <input class="inputs" id="password" type="password"/>
+                    </td>
+                    <td>实  名:</td>
+                    <td><input class="inputs" id="realname" type="text"/></td>
+                </tr>
+                <tr>
+                    <td>标  题:</td>
+                    <td><input class="inputs" id="title"type="text"/></td>
+                    <td>手  机:</td>
+                    <td><input class="inputs" id="phone" type="text"/></td>
+                </tr>
+                <tr>
+                    <td>传  真:</td>
+                    <td><input class="inputs" id="fax" type="text"/></td>
+                    <td>email:</td>
+                    <td><input class="inputs" id="email" type="text"/></td>
+                </tr>
+                <tr>
+                    <td>省/直辖市:</td>
+                    <td>
+                        <select class="inputs" id="province" onchange="cityName(this.value);">
+                            <option value="">
+                                请选择省名
+                            </option>
+                        </select>
+                    </td>
+                    <td>城市</td>
+                    <td>
+                        <select class="inputs" id="city">
+                            <option value="">
+                                请选择城市名
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>详细地址:</td>
+                    <td><input class="inputs" id="address" type="text"/></td>
+                    <td>QQ:</td>
+                    <td><input class="inputs" id="QQ" type="text"/></td>
+                </tr>
+                <tr>
+                    <td>笔  名:</td>
+                    <td><input class="inputs" id="nickname" type="text"/></td>
+                    <td>所属部门:</td>
+                    <td>
+                        <select class="inputs" id="dept">
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    
+                    <td>所属角色:</td>
+                    <td>
+                        <select class="inputs" id="SPRole"  multiple="multiple">
+                        </select>
+                    </td>
+                    <td> 
+                        <input id="Right" style=" width:30px" type="button" value=">"/><br />
+                        <input id="Left" style=" width:30px"  type="button" value="<"/><br />
+                    </td>
+                    <td>
+                        <select class="inputs" id="CRole" multiple="multiple">
+                        </select>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <input class="btn" type="submit" value="确定" onclick="javascript: updateUser(getQueryStr('UserId'))">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input class="btn" type="submit" value="取消" onclick="window.location.href = '/SystemApplication/UserInfo'" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+     </center>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/Tooltip.mini.js"></script>
+    <script src="~/Scripts/artDialog.source.js"></script>
+    <script src="~/Scripts/Common.js" type="text/javascript"></script>
+    <script src="~/Scripts/onloadprovince.js"></script>
+    <script src="../../Scripts/sweetalert2.js"></script>
+     <script lang="ja" type="text/javascript">
+        $(document).ready(function () {
+            var userId = getQueryStr("UserId");
+            assignment(userId);
+            role();
+        });
+        function assignment(userId) {
+            //部门列表
+            var result_dept = requestUrl("/SystemApplication/GetDepartment", null);
+            result_dept = eval(result_dept);
+            var dept = "";
+            for (var i = 0; i < result_dept.length; i++) {
+                dept += "<option value='" + result_dept[i].DeptId + "'>" + result_dept[i].Dept + "</option>";
+            }
+            $("#dept").append(dept);
+
+            //角色列表
+            //剩余角色
+            var result_SPRole = requestUrl("/SystemApplication/GetSurplusRole", { 'UserId': userId });
+            result_SPRole = eval("(" + result_SPRole + ")");;
+            var SPRole = "";
+            $("#SPRole").html("");
+            for (var i = 0; i < result_SPRole.total; i++) {
+                SPRole += "<option value='" + result_SPRole.rows[i].ROLEID + "'>" + result_SPRole.rows[i].ROLE + "</option>";
+            }
+            $("#SPRole").append(SPRole);
+            //当前角色
+            var result_CRole = requestUrl("/SystemApplication/GetCurrentUserRole", { 'UserId': userId });
+            result_CRole = eval("(" + result_CRole + ")");;;
+            var CRole = "";
+            $("#CRole").html("");
+            for (var i = 0; i < result_CRole.total; i++) {
+                if (result_CRole.rows[i].ROLEID == "120") {
+                    CRole += "<option value='" + result_CRole.rows[i].ROLEID + "'>" + result_CRole.rows[i].ROLE + "</option>";
+                    $("#CRole").attr("disabled", "disabled").css("background-color", "#EEEEEE;");;
+                }
+                else {
+                    CRole += "<option value='" + result_CRole.rows[i].ROLEID + "'>" + result_CRole.rows[i].ROLE + "</option>";
+                }
+            }
+            $("#CRole").append(CRole);
+
+            var result = requestUrl("/SystemApplication/GetUserByUserId", { 'UserId': userId });
+            result = eval(result);
+            $("#username").val(result[0].UserName);
+            if (result[0].Sex == "1") {
+                $("#man")[0].checked = true;
+            }
+            if (result[0].Sex == "2") {
+                $("#woman")[0].checked = true;
+            }
+
+            $("#password").val(result[0].Password);
+            $("#realname").val(result[0].RealName);
+            $("#title").val(result[0].Title);
+            $("#phone").val(result[0].Phone);
+            $("#fax").val(result[0].Fax);
+            $("#email").val(result[0].Email);
+            $("#address").val(result[0].Address);
+            $("#QQ").val(result[0].QQ);
+            $("#nickname").val(result[0].NickName);
+            $("#province option").text(result[0].Province);
+            $("#city option").text(result[0].City);
+            var count = $("#dept").get(0).options.length;
+            for (var i = 0; i < count; i++) {
+                if ($("#dept option")[i].attributes[0].nodeValue == result[0].DeptId) {
+                    $("#dept option")[i].selected = true;
+                    break;
+                }
+            }
+        }
+        //角色事件处理
+        function role() {
+            $("#Right").click(function () {
+                //获取所有选中option
+                var $options = $("#SPRole option:selected");
+                //删除select中选中的option
+                var $remove = $options.remove();
+                $options.attr('status', 'add');
+                //将选中的option添加到select2中
+                $remove.appendTo('#CRole');
+                $options.each(function () {
+                    //alert(this.value);
+                });
+            });
+
+            //左边双击进入右边
+            $("#SPRole").dblclick(function () {
+                var $options = $("#SPRole option:selected");
+                //删除select中选中的option
+                var $remove = $options.remove();
+                //将选中的option添加到select2中
+                $options.attr('status', 'add');
+                $remove.appendTo('#CRole');
+            });
+
+            //将左侧复制到右侧
+            $("#Left").click(function () {
+                var $optino = $("#CRole option:selected");
+                var $remove = $optino.remove();
+                $options.attr('status', 'del');
+                $remove.appendTo('#SPRole');
+
+            });
+
+            //右边双击进入左边
+            $("#CRole").dblclick(function () {
+                var $options = $("#CRole option:selected");
+                //删除select中选中的option
+                var $remove = $options.remove();
+                //将选中的option添加到select2中
+                $remove.appendTo('#SPRole');
+                $options.attr('status', 'del');
+            });
+         }
+         //修改用户信息
+        function updateUser(userId) {
+            var userName = $("#username").val();
+            var password = $("#password").val();
+            var realname = $("#realname").val();
+            var sex = $("input[name='sex']:checked").val();
+            var title = $("#title").val();
+            var phone = $("#phone").val();
+            var fax = $("#fax").val();
+            var email = $("#email").val();
+            var province = $("#province option:selected").text();
+            var city = $("#city option:selected").text();
+            var address = $("#address").val();
+            var QQ = $("#QQ").val();
+            var nickname = $("#nickname").val();
+            var dept = $("#dept option:selected").val();
+
+            var json = "[";
+            $("select option[status='add']").each(function () {
+                json += "{add:'" + $(this)[0].value + "'},";
+            });
+            $("select option[status='del']").each(function () {
+                json += "{del:'" + $(this)[0].value + "'},";
+            });
+            json = json.substring(0, json.length - 1);
+            json += "]";
+            if (userName == "" || password == "" || province == "" || city == "" || realname == "" || address == "" || dept == "" || role == "") {
+                $("#username,#password,#province,#city,#realname,#address,#dept,#role").addClass("tooltipinputerr");
+            }
+            else {
+                var result_updateuser = requestUrl("/SystemApplication/UpdateUser", { "UserId": userId, "UserName": userName, "Password": password, "Sex": sex, "RealName": realname, "Title": title, "Phone": phone, "Fax": fax, "Email": email, "Province": province, "City": city, "Address": address, "QQ": QQ, "NickName": nickname, "DeptId": dept, "RoleId": json });
+                if (result_updateuser == "true") {
+
+                    swal('Success', '信息已修改且角色已授予', 'success');
+                }
+                else {
+                    swal('Fail', '信息修改失败', 'error');
+                     
+                }
+                assignment(userId);
+            }
+        }
+    </script>
+</body>
+</html>

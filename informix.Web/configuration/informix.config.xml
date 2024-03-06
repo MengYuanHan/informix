@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<informix>
+  <session id="temp">
+    <UserId id="UserId" desc="临时存储用户编号" used="true">1001</UserId>
+    <UserName id="UserName" desc="临时存储用户名" used="true">admin</UserName>
+  </session>
+  <role>
+    <authority id="startup" value="127" desc="启用用户" used="true"></authority>
+    <authority id="blockup" value="128" desc="停用用户" used="true"></authority>
+    <authority id="updateuser" value="130" desc="修改用户" used="true"></authority>
+    <authority id="delapp" value="129" desc="删除应用" used="true"></authority>
+  </role>
+</informix>

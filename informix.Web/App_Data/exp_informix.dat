@@ -1,0 +1,4 @@
+FILE="D:\GitProject\信息管理系统\XinXiGuanLiXiTong\informix\informix.Web\App_Data\informix.dmp"
+LOG="D:\GitProject\信息管理系统\XinXiGuanLiXiTong\informix\informix.Web\App_Data\exp_informix.log"
+OWNER=('INFORMIX')
+FEEDBACK=1000

@@ -1,0 +1,19 @@
+﻿################################################################################
+# 此 .gitignore 文件已由 Microsoft(R) Visual Studio 自动创建。
+################################################################################
+
+/informix.DBUtility/obj/Debug
+/informix.IDAL/bin/Debug
+/informix.IDAL/obj/Debug
+/informix.Model/bin/Debug
+/informix.Model/obj/Debug
+/informix.OracleDAL/obj/Debug
+/informix.SQLServerDAL
+/informix.Web/obj/Debug
+/informix.WebApi/obj/Debug
+/packages
+/informix.DALFactory/obj/Debug
+/informix.DALFactory/bin/Debug
+/informix.BLL/obj/Debug
+/informix.BLL/bin/Debug
+/.vs/informix

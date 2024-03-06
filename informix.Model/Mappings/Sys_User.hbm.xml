@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="informix.Model" namespace="informix.Model.Entities">
+  <class name="informix.Model.Entities.Sys_User,informix.Model"  table="Sys_User" lazy ="true" >
+   	<id name="UserId" column="USERID" type="int">
+      <generator class="sequence">
+        <param name="sequence">SEQ_USERID</param>
+      </generator>
+		</id>
+		<property name="UserName" type="string" column="USERNAME" />
+		<property name="Password" type="string" column="PASSWORD" />
+		<property name="DeptId" type="int" column="DEPTID" />
+		<property name="RealName" type="string" column="REALNAME" />
+		<property name="Title" type="string" column="TITLE" />
+		<property name="Sex" type="string" column="SEX" />
+		<property name="Phone" type="string" column="PHONE" />
+		<property name="Fax" type="string" column="FAX" />
+		<property name="Province" type="string" column="PROVINCE" />
+		<property name="City" type="string" column="CITY" />
+		<property name="Address" type="string" column="ADDRESS" />
+		<property name="Email" type="string" column="EMAIL" />
+		<property name="QQ" type="string" column="QQ" />
+		<property name="NickName" type="string" column="NICKNAME" />
+		<property name="CreateUserId" type="int" column="CREATEUSERID" />
+		<property name="CreateDate" type="DateTime" column="CREATEDATE" />
+		<property name="State" type="string" column="STATE" />
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="informix.Model" namespace="informix.Model.Entities">
+  <class name="informix.Model.Entities.Sys_Application,informix.Model"  table="Sys_Application" lazy ="true">
+    <id name="AppId" column="APPID" type="int">
+      <generator class="sequence">
+        <param name="sequence">SEQ_APPLICATIONID</param>
+      </generator>
+    </id>
+    <property name="AppName" type="string" column="APPNAME" />
+    <property name="AppDesc" type="string" column="APPDESC" />
+    <property name="Url" type="string" column="URL" />
+    <property name="OrderBy" type="int" column="ORDERBY" />
+    <!--设置为不可空-->    
+    <!--<bag name="Module" table="Sys_Module" >
+      <key column="ApplicationId"/>
+      <one-to-many class="informix.Model.Entities.Sys_Module,informix.Model"/>
+    </bag>-->
+
+    <!--多对多关系：Order有多个Products-->
+    <!--<bag name="Modules" generic="true" table="SYS_APP_MODULE">
+      <key column="`Sys_Application`"/>
+      <many-to-many column="Sys_Module" class ="informix.Model.Entities.Sys_Module,informix.Model"/>
+    </bag>-->
+  </class>
+</hibernate-mapping>

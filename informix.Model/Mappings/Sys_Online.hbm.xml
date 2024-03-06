@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="informix.Model" namespace="informix.Model.Entities">
+  <class name="informix.Model.Entities.Sys_Online,informix.Model"  table="Sys_Online" lazy ="true" >
+    <id name="OnlineId" column="ONLINEID" type="int">
+      <generator class="sequence">
+        <param name="sequence">SEQ_ONLINEID</param>
+      </generator>
+    </id>
+    <property name="GUID" type="string" column="GUID" />
+    <property name="LoginTime" type="DateTime" column="LOGINTIME" />
+    <property name="IP" type="string" column="IP"/>
+    <property name="UserId" type="int" column="USERID" />
+    <property name="UserName" type="string" column="UserName" />
+    <property name="isVailable" type="string" column="isVailable" />
+  </class>
+</hibernate-mapping>

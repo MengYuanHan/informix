@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>运行状态</title>
+    <link href="~/css/custom.css" rel="stylesheet" />
+</head>
+<body>
+    <div>
+        <ul class="tab clearfix">
+            <li  class="tab-active">系统信息</li>
+            <li>系统维护</li>
+        </ul>
+        <div class="content">
+            <div class="inner">
+                <table>
+                    <tr>
+                        <td class="left">框架版本</td>
+                        <td class="right">v2.0</td>
+                    </tr>
+                    <tr>
+                        <td class="left">在线用户数据保存环境</td>
+                        <td class="right">DataBase</td>
+                    </tr>
+                    <tr>
+                        <td class="left">用户在线过期时间(分)</td>
+                        <td class="right">600</td>
+                    </tr>
+                    <tr>
+                        <td class="left">当前在线用户</td>
+                        <td class="right">1</td>
+                    </tr>
+                    <tr>
+                        <td class="left">缓存处理类</td>
+                        <td class="right">informix.cache</td>
+                    </tr>
+                    <tr>
+                        <td class="left">当前处理缓存数</td>
+                        <td class="right">4</td>
+                    </tr>
+                    <tr>
+                        <td class="left">大小可用缓存</td>
+                        <td class="right"></td>
+                    </tr>
+                    <tr>
+                        <td class="left">服务器操作系统</td>
+                        <td class="right"></td>
+                    </tr>
+                    <tr>
+                        <td class="left">服务器运行时间</td>
+                        <td class="right"></td>
+                    </tr>
+                    <tr>
+                        <td class="left">应用运行时间</td>
+                        <td class="right"></td>
+                    </tr>
+                    <tr>
+                        <td class="left">物理内存使用</td>
+                        <td class="right"></td>
+                    </tr>
+                    <tr>
+                        <td class="left">虚拟内存使用</td>
+                        <td class="right"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="inner" style="display: none">
+                <div>缓存清空</div>
+                <div>
+                    <input type="button" value="清空" /></div>
+                <div>重启web应用程序</div>
+                <div>
+                    <input type="button" value="重启" /></div>
+            </div>
+        </div>
+    </div>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script type="text/javascript">
+        var lists = $('.tab li');
+        var contents = $('.content .inner');
+        function bindEvent() {
+
+            lists.each(function (index_li, li) {
+                $(this).on('click', function (event) {
+
+                    lists.removeClass('tab-active');
+                    $(this).addClass('tab-active');
+
+                    contents.each(function (index_content, content) {
+                        if (index_li === index_content) {
+                            $(this).show();
+                        } else {
+                            $(this).hide();
+                        }
+                    });
+                });
+            });
+        }
+
+        function init() {
+            bindEvent();
+        }
+        init();
+    </script>
+</body>
+</html>
